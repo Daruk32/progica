@@ -1,0 +1,15 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+home:
+    path: /home
+    controller: App\Controller\HomeController::index
+
+contact:
+    path: /contact
+    controller: App\Controller\HomeController::contact
+
+carte:
+    path: /carte
+    controller: App\Controller\HomeController::carte
