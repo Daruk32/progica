@@ -67,7 +67,7 @@ class GiteRepository extends ServiceEntityRepository
                 ->setParameter('minCouchage', $search->getMinCouchage());
         }
 
-        $query .= $query
+        $query = $query
             ->orderBy("g.id", "ASC")
             ->getQuery()
             ->getResult();

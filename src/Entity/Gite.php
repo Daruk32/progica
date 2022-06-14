@@ -6,6 +6,8 @@ use App\Repository\GiteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=GiteRepository::class)
@@ -21,33 +23,61 @@ class Gite
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *        min=3,
+     *        max=50,
+     *        minMessage = "Le nom du gîte doit avoir au moins {{ limit }} caractères",
+     *        maxMessage = "Le nom du gîte doit avoir au plus {{ limit }} caractères"
+     * )
      */
     private string $nom;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(
+     *        min=10,
+     *        max=255,
+     *        minMessage = "La description du gîte doit avoir au moins {{ limit }} caractères",
+     *        maxMessage = "La description du gîte doit avoir au plus {{ limit }} caractères"
+     * )
      */
     private string $description;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *        min=30,
+     *        max=300,
+     *        notInRangeMessage = "La chambre doit être entre {{ min }} m² et {{ max }} m²"
+     * )
      */
     private int $surface;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotNull
      */
     private int $chambre;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotNull
      */
     private int $couchage;
 
     /**
      * @ORM\ManyToMany(targetEntity=Equipement::class, inversedBy="gites")
+     * @Assert\Length(
+     *        min=30,
+     *        minMessage = "La chambre doit avoir au minimum {{ limit }} caractères"
+     * )
      */
     private $equipements;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="gites")
+     */
+    private $users;
 
     public function __construct()
     {
@@ -139,6 +169,18 @@ class Gite
     public function removeEquipement(Equipement $equipement): self
     {
         $this->equipements->removeElement($equipement);
+
+        return $this;
+    }
+
+    public function getUsers(): ?User
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?User $users): self
+    {
+        $this->users = $users;
 
         return $this;
     }

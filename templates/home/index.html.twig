@@ -13,17 +13,20 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-3">
-                            {{ form(form.minSurface) }}
+                        <div class="col-md-2">
+                            {{ form_row(form.minSurface) }}
+                        </div>
+                        <div class="col-md-2">
+                            {{ form_row(form.minChambre) }}
+                        </div>
+                        <div class="col-md-2">
+                            {{ form_row(form.minCouchage) }}
                         </div>
                         <div class="col-md-3">
-                            {{ form(form.minChambre) }}
+                            {{ form_row(form.equipement) }}
                         </div>
-                        <div class="col-md-3">
-                            {{ form(form.minCouchage) }}
-                        </div>
-                        <div class="col-md-3">
-                            {{ form(form.submit) }}
+                        <div class="col-md-2">
+                            {{ form_row(form.submit) }}
                         </div>
                     </div>
                 </div>

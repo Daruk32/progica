@@ -29,6 +29,11 @@ class GiteSearchType extends AbstractType
                 "label" => false,
                 "attr" => ["placeholder" => "Nombre de couchage minimum"]
             ])
+            ->add('equipement', IntegerType::class, [
+                "required" => false,
+                "label" => false,
+                "attr" => ["placeholder" => "Equipements fournis"]
+            ])
             ->add('submit', SubmitType::class, [
                 "label" => "Rechercher",
                 "attr" => ['class'=> 'btn-secondary']

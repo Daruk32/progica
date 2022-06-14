@@ -33,3 +33,15 @@ php bin/console make:auth
 UserAuthentificator
 Default
 Default
+
+# Installer une relation entre tables existantes
+php bin/console make:entity Gite (existe déjà)
+users
+relation
+User
+ManyToOne
+Yes
+
+Migrer
+php bin/console make:migration
+php bin/console d:m:m

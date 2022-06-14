@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class GiteSearch
 {
     /**
-     * @return int|null
+     * @return int|null 
      */
     private $minSurface;
 
@@ -19,7 +21,10 @@ class GiteSearch
      */
     private $minCouchage;
 
-
+    /**
+     * @return string|null
+     */
+    private $equipement;
 
     /**
      * @return int|null
@@ -71,6 +76,24 @@ class GiteSearch
     public function setMinCouchage($minCouchage)
     {
         $this->minCouchage = $minCouchage;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of equipement
+     */
+    public function getEquipement()
+    {
+        return $this->equipement;
+    }
+
+    /**
+     * Set the value of equipement
+     */
+    public function setEquipement($equipement): self
+    {
+        $this->equipement = $equipement;
 
         return $this;
     }

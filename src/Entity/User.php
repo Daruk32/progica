@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -34,6 +36,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Gite::class, mappedBy="users")
+     */
+    private $gites;
+
+    public function __construct()
+    {
+        $this->gites = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -117,5 +129,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Gite>
+     */
+    public function getGites(): Collection
+    {
+        return $this->gites;
+    }
+
+    public function addGite(Gite $gite): self
+    {
+        if (!$this->gites->contains($gite)) {
+            $this->gites[] = $gite;
+            $gite->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGite(Gite $gite): self
+    {
+        if ($this->gites->removeElement($gite)) {
+            // set the owning side to null (unless already changed)
+            if ($gite->getUsers() === $this) {
+                $gite->setUsers(null);
+            }
+        }
+
+        return $this;
     }
 }
