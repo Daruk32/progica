@@ -45,3 +45,19 @@ Yes
 Migrer
 php bin/console make:migration
 php bin/console d:m:m
+
+# Style
+npm install
+npm run dev-server
+
+
+
+# Envoyer un mail depuis un formulaire de contact
+php bin/console make:form
+\App\Entity\ContactType
+
+Créer le formulaires
+Mettre la fonction dans le homecontroller
+L'implanter dans contact.html.twig
+
+Modifier le MAILER_DSN

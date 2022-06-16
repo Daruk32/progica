@@ -4,6 +4,27 @@
 
 {% block body %}
 
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+
     <h1> Formulaire de contact </h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_start(form) }}
+
+                {{ form_rest(form) }}
+
+                <input type="submit" class="btn btn-success" value="Envoyer">
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+
 
 {% endblock %}
